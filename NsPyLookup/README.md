@@ -23,10 +23,10 @@ Built for learning how DNS works at the packet level.
 ## Installation
 
 ```bash
-git clone https://github.com/<your-username>/NsPyLookup.git
-cd NsPyLookup
 pip install scapy
 ```
+
+Then download `main.py` from this folder and run it with Python.
 
 ## Usage
 
@@ -76,7 +76,7 @@ On Windows, open the terminal as Administrator if you get a permission error.
 Error examples:
 
 ```
-[-] Erro DNS: NXDOMAIN (domínio não existe)
+[-] DNS error: NXDOMAIN (domain does not exist)
 [-] No response from DNS server (Timeout).
 ```
 
@@ -100,7 +100,7 @@ This project is intended for educational purposes. Only send queries to DNS serv
 
 ## License
 
-MIT (add a `LICENSE` file to the repository if you choose this license).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
