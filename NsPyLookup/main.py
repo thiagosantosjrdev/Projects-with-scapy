@@ -77,11 +77,11 @@ def solve_name(domain: str, dns_server: str, sport: int) -> None:
     try:
         res: Packet | None = sr1(pkt, timeout=2, verbose=0)
     except PermissionError:
-        print("[!] Permissão negada: execute o terminal como administrador/root.")
+        print("[!] Permission denied: run the terminal as administrator/root.")
         return
     except OSError as e:
-        print(f"[!] Erro de rede: {e}")
-        print("    No Windows, verifique se o Npcap está instalado.")
+        print(f"[!] Network error: {e}")
+        print("    On Windows, make sure Npcap is installed.")
         return
 
     if not res or not res.haslayer(DNS):
@@ -91,11 +91,11 @@ def solve_name(domain: str, dns_server: str, sport: int) -> None:
     dns_layer: DNS = res.getlayer(DNS)
 
     if dns_layer.rcode != 0:
-        print(f"[-] Erro DNS: {RCODES.get(dns_layer.rcode, dns_layer.rcode)}")
+        print(f"[-] DNS error: {RCODES.get(dns_layer.rcode, dns_layer.rcode)}")
         return
 
     if dns_layer.tc:
-        print("[!] Resposta truncada (TC=1); seria necessário repetir via TCP.")
+        print("[!] Truncated response (TC=1); a TCP retry would be required.")
 
     if dns_layer.ancount == 0:
         print("[-] Domain found, but no records returned.")
