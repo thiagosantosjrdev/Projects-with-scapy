@@ -78,7 +78,15 @@ def inspect_dns_packet(pkt: Packet) -> None:
 
             print(f"{i:02d} - Type: {c_dnsrr.type}({qtype_name})")
             print(f"     Name: {c_dnsrr.rrname.decode()}")
-            print(f"     Data: {c_dnsrr.rdata}")
+            if hasattr(c_dnsrr, "exchange"): 
+                print(f"     Data: priority={c_dnsrr.preference} mail server={c_dnsrr.exchange.decode()}")
+            elif hasattr(c_dnsrr, "mname"):
+                print(
+                    f"     Data: primary NS={c_dnsrr.mname.decode()} "
+                    f"admin={c_dnsrr.rname.decode()} serial={c_dnsrr.serial}"
+                )
+            else:
+                print(f"     Data: {c_dnsrr.rdata}")
             print(f"     TTL: {c_dnsrr.ttl}\n")
 
 
